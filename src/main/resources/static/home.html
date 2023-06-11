@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* CSS for calendar display */
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      border: 1px solid #ccc;
+      padding: 5px;
+      text-align: center;
+    }
+
+    td:hover {
+      background-color: lightgray;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Todo Calendar</h2>
+  <div id="calendar"></div>
+
+  <script>
+    // JavaScript code
+    // Array to hold the todos for each day of the month
+    const todos = [
+      "",
+      "Todo 1",
+      "Todo 2",
+      "Todo 3",
+      "Todo 4",
+      "Todo 5",
+      "Todo 6",
+      "Todo 7",
+      "Todo 8",
+      "Todo 9",
+      "Todo 10",
+      "Todo 11",
+      "Todo 12",
+      "Todo 13",
+      "Todo 14",
+      "Todo 15",
+      "Todo 16",
+      "Todo 17",
+      "Todo 18",
+      "Todo 19",
+      "Todo 20",
+      "Todo 21",
+      "Todo 22",
+      "Todo 23",
+      "Todo 24",
+      "Todo 25",
+      "Todo 26",
+      "Todo 27",
+      "Todo 28",
+      "Todo 29",
+      "Todo 30",
+      "Todo 31",
+    ];
+
+    // Get the current date
+    const currentDate = new Date();
+    console.log (currentDate);
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    // Get the calendar element
+    const calendar = document.getElementById("calendar");
+
+    // Render the calendar for the current month
+    function renderCalendar() {
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      console.log(daysInMonth);
+
+      // Clear the calendar
+      calendar.innerHTML = "";
+
+      // Create the table
+      const table = document.createElement("table");
+
+      // Create the table header row
+      const headerRow = document.createElement("tr");
+      const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      weekdays.forEach((day) => {
+        const th = document.createElement("th");
+        th.textContent = day;
+        headerRow.appendChild(th);
+      });
+      table.appendChild(headerRow);
+
+      // Create the table rows and cells for each day
+      let date = new Date(currentYear, currentMonth, 1);
+      let dayOfWeek = date.getDay();
+      let row = document.createElement("tr");
+      for (let i = 0; i < dayOfWeek; i++) {
+        const emptyCell = document.createElement("td");
+        row.appendChild(emptyCell);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement("td");
+        cell.textContent = day;
+
+        // Add event listener for hover
+        cell.addEventListener("mouseover", () => {
+          if (todos[day]) {
+            cell.textContent = todos[day];
+          }
+        });
+
+        cell.addEventListener("mouseout", () => {
+          cell.textContent = day;
+        });
+
+        row.appendChild(cell);
+        dayOfWeek++;
+
+        if (dayOfWeek === 7) {
+          table.appendChild(row);
+          row = document.createElement("tr");
+          dayOfWeek = 0;
+        }
+      }
+
+      // Append the table to the calendar element
+      calendar.appendChild(table);
+    }
+
+    // Render the initial calendar
+    renderCalendar();
+  </script>
+</body>
+</html>
