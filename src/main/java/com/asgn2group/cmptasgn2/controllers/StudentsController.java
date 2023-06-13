@@ -1,36 +1,62 @@
 package com.asgn2group.cmptasgn2.controllers;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.asgn2group.cmptasgn2.models.Student;
+import com.asgn2group.cmptasgn2.models.StudentRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+
 
 @Controller // basically when we say @controllers and the import thing above. we are annotating it which mean we are basically saying this is a controller and listen for external requests 
 public class StudentsController {
+    @Autowired
+    private StudentRepository studentRepo;
+
     @GetMapping("/users/view")
     public String getAllUsers(Model model){
         System.out.println("requesting to get all users");
-        // TODO: gett all users from the database.
-        List<Student> students = new ArrayList<>();
-        students.add(new Student("mike",174.00,80.00,"Red",3.08));
-        students.add(new Student("joe",170.00,90.00,"Brown",2.08));
-        students.add(new Student("jack",190.00,110.00,"Gray",4.08));
+        // getting all users/students from the database.
+        List<Student> students = studentRepo.findAll();
         
         //end of database call
         model.addAttribute("us", students);//thus takes our users puts it in a model and sends it into the view to show everybody that is in this list
         return "users/showAll";
     }
+
+    @PostMapping("/users/add")
+    public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response){
+        System.out.println("Adding new student");
+        String newName = newstudent.get("name");
+        double newHeight = Double.parseDouble( newstudent.get("height"));
+        double newWeight = Double.parseDouble( newstudent.get("weight"));
+        String newHaircolor = newstudent.get("haircolor");
+        float newGpa = Float.parseFloat( newstudent.get("gpa"));
+        studentRepo.save(new Student(newName,newHeight,newWeight,newHaircolor,newGpa));
+        response.setStatus(201);
+        return "users/addedStudent";
+    }
+
 }
 
 
 
 
 
-// Code for database:
+// while uneeded this is the Code for database minipulation through the command line:
 
 // - to create the database 
 //     - CREATE TABLE students (uid SERIAL, name VARCHAR(255), height Float, weight FLOAT, haircolor VARCHAR(255), gpa FLOAT);
