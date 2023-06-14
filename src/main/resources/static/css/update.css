@@ -18,62 +18,24 @@ body{
 .details-container{
     padding: 20px;
 }
-.studentcontainer {
-  /* what we want to do is create different sections using 
-  the width and height and back gound. and then change their position using the left right top and bottom values.
-  the top bottom right and left can be given numbers like 0, and also percentages. 
-  then we give it white boarders to create the white space and then round them off.  
-  */
-  border-style: solid;
-  border-color: rgb(255, 255, 255);
-  border-width: 5px;
-  border-radius: 8px;
-  background-color: #e9eff1;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 70%;
-  position: absolute;
-  font-size: 10px;
-  display: flex;
-    flex-wrap: wrap;
+
+
+.addcontainer {
+border-style: solid;
+border-color: white;
+border-width: 5px;
+border-radius: 8px;
+background-color: #e9eff1;
+right: 0;
+top: 0;
+height: 100%;
+width: 100%;
+position: fixed;   
+    
 }
-
-.student-rectangle {
-    border: 1px solid black;
-      padding: 10px;
-      margin: 10px;
-      display: flex;
-      flex-direction: column;
-      max-width: auto;
-      box-sizing: border-box;
-      max-height: auto;
-      text-align: center
-    }
-
-  .addcontainer {
-    border-style: solid;
-    border-color: white;
-    border-width: 5px;
-    border-radius: 8px;
-    background-color: #e9eff1;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    position: fixed;   
-      
-  }
-  .student-details {
-    max-height: 100px; 
-    overflow: auto;
-  }
   
-.student-outter-container{
-    margin: 10%;
-    padding: 20%;
+  
 
-}
 
 .headers{
   color: #136fb5;

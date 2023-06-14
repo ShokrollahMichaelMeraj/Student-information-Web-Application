@@ -11,7 +11,7 @@
 
         <div class="addcontainer">
       
-            <form action="/users/details" method="POST">
+            <form th:action="@{/users/details/{uid}(uid=${student.uid})}" method="POST">
               <div class="addcontainer">
                 <h2 class="headers">Update Student</h2>
                 <input type="text" name="name" id="name" pattern="[a-zA-Z]+" placeholder="First Name"  required th:value="${student.name}"> <br>

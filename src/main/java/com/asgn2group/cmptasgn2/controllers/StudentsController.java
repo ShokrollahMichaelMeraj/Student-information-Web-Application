@@ -64,33 +64,39 @@ public class StudentsController {
     @GetMapping("/users/details/{uid}")
         public String getStudentDetails(@PathVariable("uid") Integer uid, Model model) {
             System.out.println("Viewing Selected Student");
+            Optional<Student> studentOp = studentRepo.findById(uid);
+            if (studentOp.isPresent()) {
+                Student student = studentOp.get();
+                model.addAttribute("student", student);
+                return "users/details";
+            } else {
+                // Handle student not found error
+                return "error-page";
+            }
+    }  
+    //UPDATE: update
+    
+    @PostMapping("/users/details/{uid}")
+    public String updateStudent(@PathVariable("uid") Integer uid, @RequestParam Map<String, String> selectedStudent, HttpServletResponse response) {
+        System.out.println("Updating student");
+
         Optional<Student> studentOp = studentRepo.findById(uid);
         if (studentOp.isPresent()) {
             Student student = studentOp.get();
-            model.addAttribute("student", student);
-            return "users/details";
+            student.setName(selectedStudent.get("name"));
+            student.setHeight(Float.parseFloat(selectedStudent.get("height")));
+            student.setWeight(Float.parseFloat(selectedStudent.get("weight")));
+            student.setHaircolor(selectedStudent.get("haircolor"));
+            student.setGpa(Float.parseFloat(selectedStudent.get("gpa")));
+            studentRepo.save(student);
+            response.setStatus(201);
+            System.out.println("Successfully Updated Student");
+            return "redirect:/users/adding";
         } else {
-            // Handle student not found error
-            return "error-page";
+            return "users-error";
         }
-    }  
-    //UPDATE: update
-    // @PostMapping("/users/details/{uid}")
-    // public String updateStudent(@RequestParam Map<String, String> selectedStudent, HttpServletResponse response){
-    //     //giving insight to what is happening:
-    //     System.out.println("updating new student");
-    //     //changing values
-    //     String updateName = selectedStudent.get("name");
-    //     Float updateHeight = Float.parseFloat( selectedStudent.get("height"));
-    //     Float updateWeight = Float.parseFloat(selectedStudent.get("weight"));
-    //     String updateHaircolor = selectedStudent.get("haircolor");
-    //     Float updateGpa = Float.parseFloat( selectedStudent.get("gpa"));
-    //     //studentRepo.save( Student(updateName,updateHeight,updateWeight,newHaircolor,newGpa));
-    //     response.setStatus(201);
-    //     //redirecting the page so it laods back to itself. this allows the getmapping of the same page to update show the students
-    //     String url = "redirect:/users/adding";
-    //     return url;
-    // }  
+}
+   
 }
 
 
