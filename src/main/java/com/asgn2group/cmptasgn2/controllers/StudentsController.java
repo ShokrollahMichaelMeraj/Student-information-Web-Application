@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,31 +27,8 @@ public class StudentsController {
     @Autowired
     private StudentRepository studentRepo;
     //view all students
-    @GetMapping("/users/view")
-    public String getAllUsers(Model model){
-        System.out.println("requesting to get all users");
-        // getting all users/students from the database.
-        List<Student> students = studentRepo.findAll();
-        
-        //end of database call
-        model.addAttribute("us", students);//thus takes our users puts it in a model and sends it into the view to show everybody that is in this list
-        return "users/showAll";
-    }
-    //INSERT: get the values of the new added student and put it in a new row in the database
-    // @PostMapping("/users/add")
-    // public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response){
-    //     System.out.println("Adding new student");
-    //     String newName = newstudent.get("name");
-    //     Float newHeight = Float.parseFloat( newstudent.get("height"));
-    //     Float newWeight = Float.parseFloat( newstudent.get("weight"));
-    //     String newHaircolor = newstudent.get("haircolor");
-    //     Float newGpa = Float.parseFloat( newstudent.get("gpa"));
-    //     studentRepo.save(new Student(newName,newHeight,newWeight,newHaircolor,newGpa));
-    //     response.setStatus(201);
-    //     return "users/addedStudent";
-    // }
-
-    //
+    
+    //view all students
     @GetMapping("/users/adding")
     public String showStudentForm(Model model) {
     
@@ -63,7 +41,7 @@ public class StudentsController {
         return "users/studentadd";
 
     }
-    //postmapping for the add new student form
+    //postmapping for the add new student form. then refreshes to load in the new student
     @PostMapping("/users/adding")
     public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response){
         //giving insight to what is happening:
@@ -82,11 +60,20 @@ public class StudentsController {
     }
 
     // UPDATE:
+    @GetMapping("/students/{id}") 
+    public String getSelectStudent(@PathVariable("id") Long id, Model model){
+
+        
+        return "users/update.html";
+
+    }
+
+}
 
 
     // DELETE:
 
-}
+
 
 
 

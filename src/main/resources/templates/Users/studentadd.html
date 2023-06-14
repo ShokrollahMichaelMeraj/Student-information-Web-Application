@@ -15,7 +15,7 @@
       <form action="/users/adding" method="POST">
         <div class="addcontainer">
           <h2 class="headers">Add Student</h2>
-          <input type="text" name="name" id="name" placeholder="Name" required> <br>
+          <input type="text" name="name" id="name" pattern="[a-zA-Z]+" placeholder="Name" required> <br>
         
           
           <input type="number" inputmode="numeric" name="height" step=0.01 id="height"  min="0" max="300"  placeholder="Height" required> <br>
@@ -24,8 +24,8 @@
           <input type="number" inputmode="numeric" name="weight" step=0.01 id="weight"  min="0"  placeholder="Weight" required> <br>
       
           <div class="hairc">
-            <label >Hair Color: </label>
-            <input type="color" name="haircolor" id="haircolor" placeholder="Haircolor" required> <br>
+            <label >Hair Color: </label> 
+            <input type="color" name="haircolor" id="haircolor" pattern="[a-zA-Z]+" placeholder="Haircolor" required> <br>
           </div>
           
           <input type="number"  inputmode="numeric" step=0.01 name="gpa" id="gpa"  min="0"  max= "4.20" placeholder="GPA" required> <br>
