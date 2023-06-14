@@ -11,7 +11,7 @@
 
         <div class="addcontainer">
       
-            <form th:action="@{/users/details/{uid}(uid=${student.uid})}" method="POST">
+            <form th:action="@{/users/details/{uid}(uid=${student.uid})}" method="POST" onsubmit="return confirm('Confirm to make changes?');">
               <div class="addcontainer">
                 <h2 class="headers">Update Student</h2>
                 <input type="text" name="name" id="name" pattern="[a-zA-Z]+" placeholder="First Name"  required th:value="${student.name}"> <br>
@@ -32,6 +32,15 @@
                 <input type="submit" value="Submit">
               </div>
             </form>
+
+            <form th:action="@{/users/delete/{uid}(uid=${student.uid})}" method="POST">
+                <input type="hidden" name="delete" value="DELETE">
+                <input type="submit" value="Delete">
+
+
+            </form>
+            
           </div>
+
     </body>
 </html>

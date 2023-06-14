@@ -5,7 +5,7 @@ body{
     
     width: auto;
     height: auto;
-    padding: 20px;
+    padding: 10px;
 }
 
 
@@ -21,19 +21,16 @@ body{
 
 
 .addcontainer {
-border-style: solid;
-border-color: white;
-border-width: 5px;
-border-radius: 8px;
+
 background-color: #e9eff1;
-right: 0;
-top: 0;
+
 height: 100%;
-width: 100%;
-position: fixed;   
+width: 100%;  
     
 }
+
   
+
   
 
 

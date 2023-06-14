@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,7 @@ public class StudentsController {
         //redirecting the page so it laods back to itself. this allows the getmapping of the same page to update show the students
         String url = "redirect:/users/adding";
         return url;
+
     }
 
     // UPDATE: view
@@ -95,12 +97,24 @@ public class StudentsController {
         } else {
             return "users-error";
         }
-}
+    }
+    //delete
+    @PostMapping("/users/delete/{uid}")
+    public String deleteStudent(@PathVariable("uid") Integer uid) {
+        System.out.println("Deleting student");
+
+        Optional<Student> studentOp = studentRepo.findById(uid);
+        if (studentOp.isPresent()) {
+            studentRepo.deleteById(uid);
+            return "redirect:/users/adding";
+        } else {
+            return "users-error";
+        }
+    }
+    
    
 }
 
-
-    // DELETE:
 
 
 
