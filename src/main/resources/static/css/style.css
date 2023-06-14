@@ -1,0 +1,121 @@
+body{
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    font-family: 'Georgia';
+    
+    width: auto;
+    height: auto;
+}
+
+
+@media (max-height: 300) {
+  .body {
+      width: 50%;
+
+  }
+}
+.studentcontainer {
+  /* what we want to do is create different sections using 
+  the width and height and back gound. and then change their position using the left right top and bottom values.
+  the top bottom right and left can be given numbers like 0, and also percentages. 
+  then we give it white boarders to create the white space and then round them off.  
+  */
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+  border-width: 5px;
+  border-radius: 8px;
+  background-color: #e9eff1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 70%;
+  position: fixed;
+  font-size: 10px;
+  display: flex;
+    flex-wrap: wrap;
+}
+
+.student-rectangle {
+    border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      box-sizing: border-box;
+      max-height: 100%;
+      text-align: center
+    }
+
+  .addcontainer {
+    border-style: solid;
+    border-color: white;
+    border-width: 5px;
+    border-radius: 8px;
+    background-color: #e9eff1;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 30%;
+    position: fixed;   
+      
+  }
+  .student-details {
+    max-height: 100px; 
+    overflow: auto;
+  }
+  
+.student-outter-container{
+    margin: 10%;
+    padding: 20%;
+
+}
+
+.headers{
+  color: #136fb5;
+  font-family: 'Georgia' ;
+  margin-left: 15px;
+
+}
+
+.addcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .addcontainer h2 {
+    text-align: center;
+  }
+
+  .addcontainer form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .addcontainer form input[type="text"],
+  .addcontainer form input[type="number"]{
+    width: 200px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .addcontainer form input[type="submit"]{
+    width: 200px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #136fb5;
+    border-radius: 15px;
+    border-width: 2.6px;
+    color: antiquewhite;
+  }
+
+  .addcontainer form input[type="submit"] {
+    width: auto;
+    cursor: pointer;
+  }
+
+
+  
+

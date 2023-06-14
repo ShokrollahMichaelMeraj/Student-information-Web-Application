@@ -21,11 +21,11 @@ import jakarta.servlet.http.HttpSession;
 
 
 
-@Controller // basically when we say @controllers and the import thing above. we are annotating it which mean we are basically saying this is a controller and listen for external requests 
+@Controller // VIEW ALL : basically when we say @controllers and the import thing above. we are annotating it which mean we are basically saying this is a controller and listen for external requests 
 public class StudentsController {
     @Autowired
     private StudentRepository studentRepo;
-
+    //view all students
     @GetMapping("/users/view")
     public String getAllUsers(Model model){
         System.out.println("requesting to get all users");
@@ -36,19 +36,55 @@ public class StudentsController {
         model.addAttribute("us", students);//thus takes our users puts it in a model and sends it into the view to show everybody that is in this list
         return "users/showAll";
     }
+    //INSERT: get the values of the new added student and put it in a new row in the database
+    // @PostMapping("/users/add")
+    // public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response){
+    //     System.out.println("Adding new student");
+    //     String newName = newstudent.get("name");
+    //     Float newHeight = Float.parseFloat( newstudent.get("height"));
+    //     Float newWeight = Float.parseFloat( newstudent.get("weight"));
+    //     String newHaircolor = newstudent.get("haircolor");
+    //     Float newGpa = Float.parseFloat( newstudent.get("gpa"));
+    //     studentRepo.save(new Student(newName,newHeight,newWeight,newHaircolor,newGpa));
+    //     response.setStatus(201);
+    //     return "users/addedStudent";
+    // }
 
-    @PostMapping("/users/add")
+    //
+    @GetMapping("/users/adding")
+    public String showStudentForm(Model model) {
+    
+        System.out.println("requesting to get all users");
+        // getting all users/students from the database.
+        List<Student> students = studentRepo.findAll();
+        
+        //end of database call
+        model.addAttribute("us", students);//
+        return "users/studentadd";
+
+    }
+    //postmapping for the add new student form
+    @PostMapping("/users/adding")
     public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response){
+        //giving insight to what is happening:
         System.out.println("Adding new student");
+        //adding values of the new student from to form to the database:
         String newName = newstudent.get("name");
-        double newHeight = Double.parseDouble( newstudent.get("height"));
-        double newWeight = Double.parseDouble( newstudent.get("weight"));
+        Float newHeight = Float.parseFloat( newstudent.get("height"));
+        Float newWeight = Float.parseFloat( newstudent.get("weight"));
         String newHaircolor = newstudent.get("haircolor");
-        float newGpa = Float.parseFloat( newstudent.get("gpa"));
+        Float newGpa = Float.parseFloat( newstudent.get("gpa"));
         studentRepo.save(new Student(newName,newHeight,newWeight,newHaircolor,newGpa));
         response.setStatus(201);
-        return "users/addedStudent";
+        //redirecting the page so it laods back to itself. this allows the getmapping of the same page to update show the students
+        String url = "redirect:/users/adding";
+        return url;
     }
+
+    // UPDATE:
+
+
+    // DELETE:
 
 }
 
