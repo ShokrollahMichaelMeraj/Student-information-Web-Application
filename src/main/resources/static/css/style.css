@@ -29,7 +29,7 @@ body{
   top: 0;
   height: 100%;
   width: 70%;
-  position: fixed;
+  position: absolute;
   font-size: 10px;
   display: flex;
     flex-wrap: wrap;
@@ -41,9 +41,9 @@ body{
       margin: 10px;
       display: flex;
       flex-direction: column;
-      max-width: 100%;
+      max-width: auto;
       box-sizing: border-box;
-      max-height: 100%;
+      max-height: auto;
       text-align: center
     }
 
@@ -99,6 +99,15 @@ body{
     width: 200px;
     padding: 10px;
     margin-bottom: 10px;
+  }
+
+  .hairc{
+    width: 200px;
+    padding: 10px;
+    
+    margin-bottom: 15px;
+    background-color: white;
+    color: grey;
   }
 
   .addcontainer form input[type="submit"]{
