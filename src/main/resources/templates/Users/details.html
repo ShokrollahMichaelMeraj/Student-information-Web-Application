@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Update</title>
+        <link rel="stylesheet" href="/css/update.css">
+    </head>
+    <body>
+
+        <div class="addcontainer">
+      
+            <form action="/users/details" method="POST">
+              <div class="addcontainer">
+                <h2 class="headers">Update Student</h2>
+                <input type="text" name="name" id="name" pattern="[a-zA-Z]+" placeholder="First Name"  required th:value="${student.name}"> <br>
+              
+                
+                <input type="number" inputmode="numeric" name="height" step=0.01 id="height"  min="60" max="1000"  placeholder="Height (cm)" th:value="${student.height}" required> <br>
+              
+                
+                <input type="number" inputmode="numeric" name="weight" step=0.01 id="weight"  min="60"  placeholder="Weight (kg)" th:value="${student.weight}" required> <br>
+            
+                <div class="hairc">
+                  <label >Hair Color: </label> 
+                  <input type="color" name="haircolor" id="haircolor" pattern="[a-zA-Z]+" placeholder="Haircolor" th:value="${student.haircolor}" required> <br>
+                </div>
+                
+                <input type="number"  inputmode="numeric" step=0.01 name="gpa" id="gpa"  min="0"  max= "4.20" placeholder="GPA" th:value="${student.gpa}"required> <br>
+      
+                <input type="submit" value="Submit">
+              </div>
+            </form>
+          </div>
+    </body>
+</html>

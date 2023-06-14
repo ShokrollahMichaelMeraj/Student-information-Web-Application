@@ -2,7 +2,7 @@ package com.asgn2group.cmptasgn2.controllers;
 
 import java.util.List;
 import java.util.Map;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,15 +59,38 @@ public class StudentsController {
         return url;
     }
 
-    // UPDATE:
-    @GetMapping("/students/{id}") 
-    public String getSelectStudent(@PathVariable("id") Long id, Model model){
+    // UPDATE: view
 
-        
-        return "users/update.html";
-
-    }
-
+    @GetMapping("/users/details/{uid}")
+        public String getStudentDetails(@PathVariable("uid") Integer uid, Model model) {
+            System.out.println("Viewing Selected Student");
+        Optional<Student> studentOp = studentRepo.findById(uid);
+        if (studentOp.isPresent()) {
+            Student student = studentOp.get();
+            model.addAttribute("student", student);
+            return "users/details";
+        } else {
+            // Handle student not found error
+            return "error-page";
+        }
+    }  
+    //UPDATE: update
+    // @PostMapping("/users/details/{uid}")
+    // public String updateStudent(@RequestParam Map<String, String> selectedStudent, HttpServletResponse response){
+    //     //giving insight to what is happening:
+    //     System.out.println("updating new student");
+    //     //changing values
+    //     String updateName = selectedStudent.get("name");
+    //     Float updateHeight = Float.parseFloat( selectedStudent.get("height"));
+    //     Float updateWeight = Float.parseFloat(selectedStudent.get("weight"));
+    //     String updateHaircolor = selectedStudent.get("haircolor");
+    //     Float updateGpa = Float.parseFloat( selectedStudent.get("gpa"));
+    //     //studentRepo.save( Student(updateName,updateHeight,updateWeight,newHaircolor,newGpa));
+    //     response.setStatus(201);
+    //     //redirecting the page so it laods back to itself. this allows the getmapping of the same page to update show the students
+    //     String url = "redirect:/users/adding";
+    //     return url;
+    // }  
 }
 
 

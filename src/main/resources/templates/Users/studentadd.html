@@ -15,13 +15,13 @@
       <form action="/users/adding" method="POST">
         <div class="addcontainer">
           <h2 class="headers">Add Student</h2>
-          <input type="text" name="name" id="name" pattern="[a-zA-Z]+" placeholder="Name" required> <br>
+          <input type="text" name="name" id="name" pattern="[a-zA-Z]+" placeholder="First Name" required> <br>
         
           
-          <input type="number" inputmode="numeric" name="height" step=0.01 id="height"  min="0" max="300"  placeholder="Height" required> <br>
+          <input type="number" inputmode="numeric" name="height" step=0.01 id="height"  min="60" max="300"  placeholder="Height (cm)" required> <br>
         
           
-          <input type="number" inputmode="numeric" name="weight" step=0.01 id="weight"  min="0"  placeholder="Weight" required> <br>
+          <input type="number" inputmode="numeric" name="weight" step=0.01 id="weight"  min="60"  placeholder="Weight (kg)" required> <br>
       
           <div class="hairc">
             <label >Hair Color: </label> 
@@ -41,11 +41,11 @@
       
         <div th:each="student : ${us}" class="student-rectangle"
               th:style="'width: ' + ${student.weight} + 'px; height: ' + ${student.height} + 'px;'">
-          
-
-          <p th:style="'color: ' + ${student.haircolor}"><span class="student-name" th:text="${student.name}" ></span></p>
+            
+          <a th:href="@{/users/details/{id}(id=${student.uid})}">
+          <p th:style="'color: ' + ${student.haircolor}"><span class="student-name" th:text="${student.name}" th:style="'font-size:'+${student.height}/10+'px'"></span></p>
           <div class="student-details">
-            <p><span th:text="${student.gpa}"></span></p>
+            <p><span th:text="${student.gpa}" th:style="'font-size:'+${student.height}/10+'px'"></span></p>
           </div>
         </div>
   
