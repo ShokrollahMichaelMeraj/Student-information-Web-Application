@@ -1,4 +1,4 @@
-# cmpt-276-assignment-2
+Student-information-Web-Application
 -
 Description:
 
